@@ -16,6 +16,8 @@ gcloud compute instances create www1 \
       apt-get update
       apt-get install apache2 -y
       service apache2 restart
+      echo "
+<h3>Web Server: www1</h3>" | tee /var/www/html/index.html'
 
 gcloud compute instances create www2 \
     --zone=$ZONE \
@@ -27,6 +29,8 @@ gcloud compute instances create www2 \
       apt-get update
       apt-get install apache2 -y
       service apache2 restart
+      echo "
+<h3>Web Server: www2</h3>" | tee /var/www/html/index.html'
 
 
  gcloud compute instances create www3 \
@@ -39,6 +43,8 @@ gcloud compute instances create www2 \
       apt-get update
       apt-get install apache2 -y
       service apache2 restart
+      echo "
+<h3>Web Server: www3</h3>" | tee /var/www/html/index.html'
 
 
 gcloud compute firewall-rules create www-firewall-network-lb \
