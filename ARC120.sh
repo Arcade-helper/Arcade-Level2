@@ -1,4 +1,4 @@
-export ZONE=$ZONE
+export ZONE=
 
 PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
 
