@@ -4,6 +4,19 @@ PROJECT_ID=$(gcloud config get-value project 2>/dev/null)
 
 BUCKET_NAME="${PROJECT_ID}-bucket"
 
+if gsutil ls -b "gs://${BUCKET_NAME}" >/dev/null 2>&1; then
+    echo "${YELLOW_TEXT}${BOLD_TEXT}Bucket '${BUCKET_NAME}' already exists.${RESET_FORMAT}"
+else
+
+    echo "${BLUE_TEXT}${BOLD_TEXT}Creating Cloud Storage bucket: ${BUCKET_NAME}${RESET_FORMAT}"
+    if gcloud storage buckets create "gs://${BUCKET_NAME}" --location=US --uniform-bucket-level-access; then
+        echo "${GREEN_TEXT}${BOLD_TEXT}Bucket '${BUCKET_NAME}' created successfully.${RESET_FORMAT}"
+    else
+        echo "${RED_TEXT}${BOLD_TEXT}Failed to create bucket '${BUCKET_NAME}'. Check your permissions and try again.${RESET_FORMAT}"
+        exit 1
+    fi
+fi
+
 gcloud compute instances create my-instance \
     --machine-type=e2-medium \
     --zone=$ZONE \
