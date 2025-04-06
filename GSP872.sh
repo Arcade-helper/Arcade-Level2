@@ -1,3 +1,5 @@
+export REGION= [Fill it from the lab]
+
 export PROJECT_ID=$(gcloud config get-value project)
 
 gcloud config set compute/region $REGION
